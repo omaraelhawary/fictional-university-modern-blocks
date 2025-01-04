@@ -293,9 +293,17 @@ class PlaceholderBlock {
     }
 }
 
+// Register our new blocks
+
+function ourNewBlocks(){
+    register_block_type_from_metadata( __DIR__ . '/build/footer' );
+}
+
+add_action('init', 'ourNewBlocks');
+
 new PlaceholderBlock('eventsandblogs');
 new PlaceholderBlock('header');
-new PlaceholderBlock('footer');
+//new PlaceholderBlock('footer');
 new PlaceholderBlock('singlepost');
 new PlaceholderBlock('page');
 new PlaceholderBlock('blogindex');
@@ -306,7 +314,7 @@ new PlaceholderBlock('mynotes');
 
 function myallowedblocks ($allowed_blocks_types, $editor_context) {
 
-    if($editor_context -> post -> post_type == 'professor'){
+    if (!empty($editor_context -> post) && $editor_context -> post -> post_type == 'professor'){
         return array('ourblocktheme/header', 'ourblocktheme/singleprofessor', 'ourblocktheme/footer');
     }
 
