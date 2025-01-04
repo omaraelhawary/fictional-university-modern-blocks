@@ -1,11 +1,6 @@
 import { registerBlockType } from "@wordpress/blocks"
 import metadata from "./block.json"
-
-function Edit() {
-    return (
-        <div>Footer</div>
-    )
-}
+import Edit from "./edit"
 
 registerBlockType(metadata.name, {
     edit: Edit
