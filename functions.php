@@ -297,12 +297,13 @@ class PlaceholderBlock {
 
 function ourNewBlocks(){
     register_block_type_from_metadata( __DIR__ . '/build/footer' );
+    register_block_type_from_metadata( __DIR__ . '/build/header' );
 }
 
 add_action('init', 'ourNewBlocks');
 
 new PlaceholderBlock('eventsandblogs');
-new PlaceholderBlock('header');
+//new PlaceholderBlock('header');
 //new PlaceholderBlock('footer');
 new PlaceholderBlock('singlepost');
 new PlaceholderBlock('page');
