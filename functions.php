@@ -262,7 +262,6 @@ class JSXBlock {
     }
 }
 
-new JSXBlock('genericheading');
 new JSXBlock('genericbutton');
 
 class PlaceholderBlock {
@@ -300,6 +299,8 @@ function ourNewBlocks(){
     register_block_type_from_metadata( __DIR__ . '/build/banner' );
     register_block_type_from_metadata( __DIR__ . '/build/slide' );
     register_block_type_from_metadata( __DIR__ . '/build/slideshow' );
+    register_block_type_from_metadata( __DIR__ . '/build/genericheading' );
+
 }
 
 add_action('init', 'ourNewBlocks');
