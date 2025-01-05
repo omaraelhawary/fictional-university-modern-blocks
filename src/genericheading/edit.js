@@ -1,6 +1,5 @@
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components"
 import { RichText, BlockControls, useBlockProps } from "@wordpress/block-editor"
-import { registerBlockType } from "@wordpress/blocks";
 
 export default function Edit(props) {
     const blockProps = useBlockProps();

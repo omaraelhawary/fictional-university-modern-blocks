@@ -232,38 +232,6 @@ function privateNote($data, $postarr){
 
 add_filter('wp_insert_post_data', 'privateNote', 10, 2);
 
-class JSXBlock {
-    public $name;
-    public $renderCallback;
-    function __construct($name, $renderCallback = null){
-        $this->name = $name;
-        $this -> renderCallback = $renderCallback;
-        add_action('init', [$this, 'onInit']);
-    }
-    
-    function ourRenderCallback($attributes, $content){
-        ob_start();
-        require get_theme_file_path("/our-blocks/{$this->name}.php");
-        return ob_get_clean();
-    }
-
-    function onInit(){
-        wp_register_script($this->name, get_stylesheet_directory_uri()."/build/{$this->name}.js", array('wp-blocks', 'wp-editor'));
-
-        $ourArgs = array(
-            'editor_script' => $this->name
-        );
-
-        if($this -> renderCallback){
-            $ourArgs['render_callback'] = [$this, 'ourRenderCallback'];
-        }
-
-        register_block_type( "ourblocktheme/{$this->name}", $ourArgs);
-    }
-}
-
-new JSXBlock('genericbutton');
-
 class PlaceholderBlock {
     public $name;
 
@@ -288,7 +256,7 @@ class PlaceholderBlock {
     }
 }
 
-// Register our new blocks
+// Register our new blocks using Modern Blocks
 
 function ourNewBlocks(){
     wp_localize_script('wp-editor', 'ourThemeData', array(
@@ -300,7 +268,7 @@ function ourNewBlocks(){
     register_block_type_from_metadata( __DIR__ . '/build/slide' );
     register_block_type_from_metadata( __DIR__ . '/build/slideshow' );
     register_block_type_from_metadata( __DIR__ . '/build/genericheading' );
-
+    register_block_type_from_metadata( __DIR__ . '/build/genericbutton' );
 }
 
 add_action('init', 'ourNewBlocks');

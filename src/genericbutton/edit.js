@@ -1,37 +1,11 @@
-import ourColors from "../inc/ourcolors"
+import ourColors from "../../inc/ourcolors"
 import { link } from "@wordpress/icons"
 import { ToolbarGroup, ToolbarButton, Popover, Button, PanelBody, PanelRow, ColorPalette } from "@wordpress/components"
-import { RichText, InspectorControls, BlockControls, __experimentalLinkControl as LinkControl, getColorObjectByColorValue } from "@wordpress/block-editor"
-import { registerBlockType } from "@wordpress/blocks"
+import { RichText, InspectorControls, BlockControls, __experimentalLinkControl as LinkControl, getColorObjectByColorValue, useBlockProps } from "@wordpress/block-editor"
 import { useState } from "@wordpress/element"
 
-
-registerBlockType("ourblocktheme/genericbutton", {
-    title: "Generic Button",
-    attributes: {
-        text: {
-            type: "string"
-        },
-        size: {
-            type: "string",
-            default: "large"
-        },
-        linkObj: {
-            type: "object",
-            default: {
-                url: "#",
-            }
-        },
-        colorName: {
-            type: "string",
-            default: "blue"
-        }
-    },
-    edit: EditComponent,
-    save: SaveComponent
-})
-
-function EditComponent(props) {
+export default function Edit(props) {
+    const blockProps = useBlockProps();
 
     const [isLinkPickerVisiable, setIsLinkPickerVisiable] = useState(false);
 
@@ -59,7 +33,7 @@ function EditComponent(props) {
 
 
     return (
-        <>
+        <div {...blockProps}>
             <BlockControls>
                 <ToolbarGroup>
                     <ToolbarButton onClick={buttonHandler} icon={link} />
@@ -87,11 +61,6 @@ function EditComponent(props) {
                 </Popover >
             )
             }
-        </>
+        </div>
     )
-}
-
-function SaveComponent(props) {
-
-    return <a href={props.attributes.linkObj?.url} className={`btn btn--${props.attributes.size} btn--${props.attributes.colorName}`}>{props.attributes.text}</a>
 }
