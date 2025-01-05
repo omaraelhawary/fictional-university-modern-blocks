@@ -6,8 +6,9 @@
   "scripts": {
     "start": "wp-scripts start src/index.js",
     "blocks": "wp-scripts start --experimental-modules",
-    "dev": "wp-scripts start",
-    "devFast": "wp-scripts start",
+    "build": "run-s buildIndex buildBlocks",
+    "buildIndex": "wp-scripts build src/index.js",
+    "buildBlocks": "wp-scripts build --experimental-modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,9 +17,10 @@
   "dependencies": {
     "@glidejs/glide": "^3.5.2",
     "@wordpress/icons": "^10.13.0",
-    "@wordpress/scripts": "^28.4.0",
+    "@wordpress/scripts": "^30.8.1",
     "axios": "^1.3.0",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
     "@wordpress/e2e-test-utils-playwright": "^1.4.0"
