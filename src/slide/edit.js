@@ -1,34 +1,17 @@
 import apiFetch from "@wordpress/api-fetch"
 import { Button, PanelBody, PanelRow } from "@wordpress/components"
-import { InnerBlocks, InspectorControls, MediaUpload, MediaUploadCheck } from "@wordpress/block-editor"
-import { registerBlockType } from "@wordpress/blocks"
+import { InnerBlocks, InspectorControls, MediaUpload, MediaUploadCheck, useBlockProps } from "@wordpress/block-editor"
 import { useEffect } from "@wordpress/element"
-import backgroundImage from "/images/library-hero.jpg"
 
+export default function Edit(props) {
+    const blockProps = useBlockProps();
 
-registerBlockType("ourblocktheme/banner", {
-    title: "Banner",
-    supports: {
-        align: ['full']
-    },
-    attributes: {
-        align: {
-            type: "string",
-            default: "full"
-        },
-        imageID: {
-            type: "number",
-        },
-        imageURL: {
-            type: "string",
-            default: backgroundImage
+    useEffect(function () {
+        if (!props.attributes.imageURL) {
+            props.setAttributes({ imageURL: ourThemeData.themePath + "/images/library-hero.jpg" })
         }
-    },
-    edit: EditComponent,
-    save: SaveComponent
-})
+    }, [])
 
-function EditComponent(props) {
     useEffect(() => {
         async function go() {
             if (props.attributes.imageID) {
@@ -68,17 +51,16 @@ function EditComponent(props) {
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>
-            <div className="page-banner">
-                <div className="page-banner__bg-image" style={{ backgroundImage: `url('${props.attributes.imageURL}')` }}></div>
-                <div className="page-banner__content container t-center c-white">
-                    <InnerBlocks allowedBlocks={["ourblocktheme/genericheading", "ourblocktheme/genericbutton"]} />
+            <div {...blockProps}>
+                <div className="hero-slider__slide" style={{ backgroundImage: `url('${props.attributes.imageURL}')` }}>
+                    <div className="hero-slider__interior container">
+                        <div className="hero-slider__overlay t-center">
+                            <InnerBlocks allowedBlocks={["ourblocktheme/genericheading", "ourblocktheme/genericbutton"]} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
 
     )
-}
-
-function SaveComponent() {
-    return <InnerBlocks.Content />
 }

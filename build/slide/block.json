@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ourblocktheme/slide",
+  "title": "Slide",
+  "supports": {
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "imageID": {
+      "type": "number"
+    },
+    "imageURL": {
+      "type": "string"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

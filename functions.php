@@ -265,8 +265,6 @@ class JSXBlock {
 new JSXBlock('genericheading');
 new JSXBlock('genericbutton');
 new JSXBlock('slideshow', true);
-new JSXBlock('slide', true);
-
 
 class PlaceholderBlock {
     public $name;
@@ -301,6 +299,7 @@ function ourNewBlocks(){
     register_block_type_from_metadata( __DIR__ . '/build/header' );
     register_block_type_from_metadata( __DIR__ . '/build/eventsandblogs' );
     register_block_type_from_metadata( __DIR__ . '/build/banner' );
+    register_block_type_from_metadata( __DIR__ . '/build/slide' );
 }
 
 add_action('init', 'ourNewBlocks');
@@ -313,17 +312,17 @@ new PlaceholderBlock('singleprogram');
 new PlaceholderBlock('singleprofessor');
 new PlaceholderBlock('mynotes');
 
-function myallowedblocks ($allowed_blocks_types, $editor_context) {
+// function myallowedblocks ($allowed_blocks_types, $editor_context) {
 
-    if (!empty($editor_context -> post) && $editor_context -> post -> post_type == 'professor'){
-        return array('ourblocktheme/header', 'ourblocktheme/singleprofessor', 'ourblocktheme/footer');
-    }
+//     if (!empty($editor_context -> post) && $editor_context -> post -> post_type == 'professor'){
+//         return array('ourblocktheme/header', 'ourblocktheme/singleprofessor', 'ourblocktheme/footer');
+//     }
 
-    if (!empty($editor_context -> post)){
-        return $allowed_blocks_types;
-    } 
+//     if (!empty($editor_context -> post)){
+//         return $allowed_blocks_types;
+//     } 
     
-    return array('ourblocktheme/header', 'ourblocktheme/footer');
-}
+//     return array('ourblocktheme/header', 'ourblocktheme/footer');
+// }
 
-add_filter('allowed_block_types_all', 'myallowedblocks', 10, 2);
+// add_filter('allowed_block_types_all', 'myallowedblocks', 10, 2);
