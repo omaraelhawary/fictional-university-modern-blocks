@@ -202,7 +202,7 @@ function logo_title(){
     return get_bloginfo('name');
 }
 
-add_filter('login_headertitle', 'logo_title');
+add_filter('login_headertext', 'logo_title');
 
 /**
  * Modifies the post data for the 'note' post type, sanitizing the post content and title, 
